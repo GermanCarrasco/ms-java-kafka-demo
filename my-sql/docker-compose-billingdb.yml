@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  mysqlbilling:
+    image: mysql:8.4
+    container_name: ms-kafka-mysql-dbbilling
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: Root123456!
+      MYSQL_DATABASE: ms-kafka-billing
+      MYSQL_USER: user
+      MYSQL_PASSWORD: User123456!
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_billing_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+
+    networks:
+      - backend-network
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pRootPassword123!"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_billing_data:
+
+networks:
+  backend-network:
+    driver: bridge
