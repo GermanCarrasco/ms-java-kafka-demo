@@ -4,12 +4,13 @@ import com.microservices.kafka.billing.microservices_kafka_demo.dto.OrderCreated
 import com.microservices.kafka.billing.microservices_kafka_demo.entities.Invoices;
 import com.microservices.kafka.billing.microservices_kafka_demo.repository.InvoiceRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class InvoiceServiceImpl implements InvoiceService {
@@ -25,5 +26,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .invoiceNumber(UUID.randomUUID().toString())
                 .createdAt(LocalDateTime.now())
                 .build());
+        log.info("Invoice saved successfully");
     }
 }

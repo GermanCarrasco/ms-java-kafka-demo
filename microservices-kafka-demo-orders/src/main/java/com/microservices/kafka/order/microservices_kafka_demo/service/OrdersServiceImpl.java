@@ -7,10 +7,11 @@ import com.microservices.kafka.order.microservices_kafka_demo.entity.Order;
 import com.microservices.kafka.order.microservices_kafka_demo.mapping.OrdersMapping;
 import com.microservices.kafka.order.microservices_kafka_demo.repository.IOrdersRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Slf4j
 @Service
 public class OrdersServiceImpl implements IOrdersService {
 
@@ -25,6 +26,7 @@ public class OrdersServiceImpl implements IOrdersService {
         var response = OrdersMapping.OrderToCreatedOrderResponse(ordersRepository.save(OrdersMapping.RequestToOrders(request)));
         //Se publica el evento en kafka
         orderProducer.publish(new OrderCreatedEvent(response.getOrderId(),request.getCustomerName(),request.getAmount()));
+        log.info("Order createdEvent successfully for customer {} amount {}", request.getCustomerName(),request.getAmount());
         return response;
     }
 

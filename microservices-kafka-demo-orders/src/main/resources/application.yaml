@@ -34,3 +34,8 @@ spring:
             add:
               type:
                 headers: false
+
+
+logging:
+  level:
+    root: INFO
