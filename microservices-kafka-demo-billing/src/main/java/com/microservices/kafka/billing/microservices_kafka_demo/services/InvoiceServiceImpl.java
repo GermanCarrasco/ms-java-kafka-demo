@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -27,5 +28,10 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .createdAt(LocalDateTime.now())
                 .build());
         log.info("Invoice saved successfully");
+    }
+
+    @Override
+    public Optional<Invoices> findInvoiceByOrderId(Long orderId) {
+        return invoiceRepository.findById(orderId);
     }
 }
