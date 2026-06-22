@@ -6,7 +6,7 @@ spring:
     name: microservices-kafka-demo
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ms-kafka?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.0.114:3306/ms-kafka?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: user
     password: User123456!
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,7 +22,7 @@ spring:
 
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 192.168.0.114:9092
 
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
