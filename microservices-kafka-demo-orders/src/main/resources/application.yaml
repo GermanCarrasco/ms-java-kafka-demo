@@ -39,3 +39,12 @@ spring:
 logging:
   level:
     root: INFO
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+  otlp:
+    tracing:
+      endpoint: http://192.168.0.114:4318/v1/traces

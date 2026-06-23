@@ -7,3 +7,7 @@ services:
       - "16686:16686"
       - "4317:4317"
       - "4318:4318"
+
+#  C:/Users/German/Desktop/DockerComposes/Jaeger
+#  scp docker-compose.yml german@192.168.0.114:C:/Users/German/Desktop/DockerComposes/Jaeger
+#  ssh german@192.168.0.114 "cd C:/Users/German/Desktop/DockerComposes/Jaeger && docker-compose up -d"
