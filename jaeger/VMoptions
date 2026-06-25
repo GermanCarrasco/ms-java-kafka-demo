@@ -1,0 +1,6 @@
+-Dotel.service.name=orders-service
+-Dotel.traces.exporter=otlp
+-Dotel.exporter.otlp.endpoint=http://localhost:4317
+-Dotel.exporter.otlp.protocol=grpc
+-Dotel.metrics.exporter=none
+-Dotel.logs.exporter=none

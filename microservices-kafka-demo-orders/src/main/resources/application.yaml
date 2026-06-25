@@ -1,9 +1,79 @@
+#server:
+#  port: 8081
+#
+#spring:
+#  application:
+#    name: microservices-kafka-demo-orders
+#
+#  datasource:
+#    url: jdbc:mysql://192.168.0.114:3306/ms-kafka?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+#    username: user
+#    password: User123456!
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update # create, create-drop, validate, none
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#        dialect: org.hibernate.dialect.MySQLDialect
+#
+#
+#  kafka:
+#    bootstrap-servers: 192.168.0.114:9092
+#
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#
+#      properties:
+#        spring:
+#          json:
+#            add:
+#              type:
+#                headers: false
+#
+#
+#logging:
+#  level:
+#    root: INFO
+#    io.opentelemetry: DEBUG
+#    io.micrometer: DEBUG
+#    io.micrometer.tracing: DEBUG
+#
+#
+#management:
+#  tracing:
+#    enabled: true
+#    sampling:
+#      probability: 1.0
+#
+#  otel:
+#    service:
+#      name: microservices-kafka-demo
+#    traces:
+#      exporter: otlp
+#    metrics:
+#      exporter: none
+#    exporter:
+#      otlp:
+#        endpoint: http://192.168.0.114:4317
+#        protocol: grpc
+#
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,info,metrics,prometheus,loggers
+
+
 server:
   port: 8081
 
 spring:
   application:
-    name: microservices-kafka-demo
+    name: microservices-kafka-demo-orders
 
   datasource:
     url: jdbc:mysql://192.168.0.114:3306/ms-kafka?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
@@ -13,13 +83,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update # create, create-drop, validate, none
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
-
 
   kafka:
     bootstrap-servers: 192.168.0.114:9092
@@ -27,7 +96,6 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
       properties:
         spring:
           json:
@@ -35,10 +103,12 @@ spring:
               type:
                 headers: false
 
-
 logging:
   level:
     root: INFO
+    io.opentelemetry: DEBUG
+    io.micrometer: DEBUG
+    io.micrometer.tracing: DEBUG
 
 management:
   tracing:
@@ -47,4 +117,5 @@ management:
 
   otlp:
     tracing:
-      endpoint: http://192.168.0.114:4318/v1/traces
+      endpoint: http://${JAEGER_HOST:192.168.0.114}:4317
+      protocol: grpc
