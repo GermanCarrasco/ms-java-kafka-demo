@@ -6,26 +6,39 @@ services:
     image: jaegertracing/all-in-one:1.57
     container_name: jaeger
     restart: unless-stopped
+
     ports:
-      - "16686:16686"   # UI
-      - "14250:14250"   # gRPC interno
+      - "16686:16686"
+      - "14250:14250"
+
     environment:
-      - COLLECTOR_OTLP_ENABLED=true
+      COLLECTOR_OTLP_ENABLED: "true"
+
+    networks:
+      - kafka-network
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
     container_name: otel-collector
     restart: unless-stopped
+
     command:
       - "--config=/etc/otel-config.yaml"
+
     volumes:
       - ./otel-config.yaml:/etc/otel-config.yaml
+
     ports:
-      - "4317:4317"   # OTLP gRPC (apps -> collector)
-      - "4318:4318"   # OTLP HTTP
+      - "4317:4317"
+      - "4318:4318"
+
     depends_on:
       - jaeger
 
-#  C:/Users/
-#  scp docker-compose.yml german@1.:C:/
-#  ssh german@1. "cd C:/Us && docker-compose up -d"
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    external: true
+    name: kafka_kafka-network

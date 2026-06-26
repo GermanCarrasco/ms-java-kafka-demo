@@ -1,0 +1,29 @@
+services:
+  ms-kafka-producer:
+    container_name: ms-kafka-producer
+
+    build:
+      context: /Users/germanantoniocarrascocalderon/git/ms-kafka-java/ms-java-kafka-demo/microservices-kafka-demo-orders
+
+    image: ms-kafka-producer:latest
+
+    restart: unless-stopped
+
+    ports:
+      - "8081:8081"
+
+    mem_limit: 768m
+    cpus: "1.0"
+
+    environment:
+      TZ: America/Santo_Domingo
+      JAVA_TOOL_OPTIONS: >
+       -Dotel.service.name=orders-service
+       -Dotel.traces.exporter=otlp
+       -Dotel.exporter.otlp.endpoint=http://otel-collector:4317
+       -Dotel.exporter.otlp.protocol=grpc
+       -Dotel.metrics.exporter=none
+       -Dotel.logs.exporter=none
+
+    networks:
+      - kafka-network

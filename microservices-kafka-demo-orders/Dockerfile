@@ -2,9 +2,9 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY target/microservices-kafka-demo-billing-0.0.1-SNAPSHOT.jar app.jar
+COPY target/microservices-kafka-demo-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 8082
+EXPOSE 8081
 
 ENTRYPOINT ["java", \
 "-XX:+UseContainerSupport", \
