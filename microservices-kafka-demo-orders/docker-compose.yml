@@ -26,4 +26,8 @@ services:
        -Dotel.logs.exporter=none
 
     networks:
-      - kafka-network
+      - kafka_kafka-network
+
+networks:
+  kafka_kafka-network:
+    external: true
