@@ -18,12 +18,14 @@ services:
     environment:
       TZ: America/Santo_Domingo
       JAVA_TOOL_OPTIONS: >
+        -javaagent:/otel/opentelemetry-javaagent.jar
         -Dotel.service.name=ms-kafka-consumer
         -Dotel.traces.exporter=otlp
         -Dotel.exporter.otlp.endpoint=http://otel-collector:4317
         -Dotel.exporter.otlp.protocol=grpc
         -Dotel.metrics.exporter=none
         -Dotel.logs.exporter=none
+        -Dotel.java.global-autoconfigure.enabled=true
 
     networks:
       - kafka_kafka-network
