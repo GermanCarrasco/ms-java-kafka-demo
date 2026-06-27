@@ -10,8 +10,6 @@ services:
     ports:
       - "16686:16686"
       - "14250:14250"
-      - "4317:4317"
-      - "4318:4318"
 
     environment:
       COLLECTOR_OTLP_ENABLED: "true"
