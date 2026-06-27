@@ -15,7 +15,7 @@ services:
       COLLECTOR_OTLP_ENABLED: "true"
 
     networks:
-      - kafka-network
+      - kafka_kafka-network
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:latest
@@ -36,9 +36,8 @@ services:
       - jaeger
 
     networks:
-      - kafka-network
+      - kafka_kafka-network
 
 networks:
-  kafka-network:
+  kafka_kafka-network:
     external: true
-    name: kafka_kafka-network
