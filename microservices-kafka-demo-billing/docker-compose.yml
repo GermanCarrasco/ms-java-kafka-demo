@@ -18,7 +18,7 @@ services:
     environment:
       TZ: America/Santo_Domingo
       JAVA_TOOL_OPTIONS: >
-        -Dotel.service.name=billing-service
+        -Dotel.service.name=ms-kafka-consumer
         -Dotel.traces.exporter=otlp
         -Dotel.exporter.otlp.endpoint=http://otel-collector:4317
         -Dotel.exporter.otlp.protocol=grpc
